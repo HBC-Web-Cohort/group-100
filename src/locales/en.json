@@ -1,0 +1,124 @@
+{
+  "meta": { "lang": "en", "dir": "ltr", "label": "English", "short": "EN", "numberLocale": "en-US" },
+  "ui": {
+    "work": "Work",
+    "info": "Info",
+    "home": "home",
+    "primaryNav": "Primary",
+    "aboutMe": "ABOUT ME",
+    "experience": "EXPERIENCE",
+    "friends": "FRIENDS",
+    "selectedWork": "SELECTED WORK",
+    "scrollHint": "SCROLL TO SEE WORK ↓",
+    "themeGlass": "Glass",
+    "themeClassic": "Classic",
+    "switchToGlass": "Switch to glass theme",
+    "switchToClassic": "Switch to classic theme",
+    "language": "Language",
+    "contactLinks": "Contact links",
+    "settings": "SETTINGS",
+    "pages": "PAGES",
+    "elsewhere": "ELSEWHERE",
+    "placeholderImage": "Placeholder image",
+    "copyright": "Placeholder content.",
+    "builtWith": "Built with React · Glass edition",
+    "footerPitch": { "lead": "Let’s build something", "accent": "together." },
+    "workHero": { "lead": "Alex", "accent": "designs", "trail": "things." }
+  },
+  "profile": {
+    "name": "Alex Rivera",
+    "role": "Product Designer",
+    "signature": "Alex",
+    "socials": { "linkedin": "LinkedIn", "resume": "Resume" }
+  },
+  "hero": {
+    "lead": "I design calm, considered products that",
+    "accent": "feel effortless."
+  },
+  "story": [
+    [
+      {
+        "image": "Studio desk",
+        "title": "Where it started.",
+        "body": [
+          "I began in industrial design, sketching objects long before I opened a design tool. Form, material and how things feel in the hand still guide how I work.",
+          "That habit of prototyping early and often followed me into software."
+        ]
+      },
+      {
+        "image": "City at dusk",
+        "title": "A few chapters, with some photos from the road."
+      }
+    ],
+    [
+      {
+        "image": "Sketchbook",
+        "title": "Finding interaction design.",
+        "body": [
+          "A side project turned into a small app, and the app turned into a career. I found I loved the loop of shipping, watching people use it, and iterating."
+        ]
+      },
+      {
+        "image": "Mountain trail",
+        "title": "Wanting more scale.",
+        "body": [
+          "Small teams taught me speed. I wanted to bring that same care to products used by millions of people every day."
+        ]
+      }
+    ],
+    [
+      {
+        "image": "Weekend coffee",
+        "title": "Outside of work,",
+        "body": [
+          "you'll find me cycling, shooting film, or rebuilding this site for the fifth time."
+        ],
+        "closing": "Thanks for stopping by!"
+      },
+      {
+        "image": "Workshop",
+        "title": "How I work.",
+        "body": [
+          "I start with the problem, sketch widely, and narrow fast. Craft matters to me: motion, type and spacing are where trust is earned."
+        ]
+      }
+    ]
+  ],
+  "experience": [
+    {
+      "company": "Northwind Labs",
+      "role": "Senior Product Designer",
+      "dates": "03/'24 — Present",
+      "body": "Leading design for the core messaging experience and a few projects I can’t talk about yet."
+    },
+    {
+      "company": "Lumen Studio",
+      "role": "Interaction Designer",
+      "dates": "06/'21 — 02/'24",
+      "body": "Designed controller-first interfaces and motion systems for a cross-platform media app."
+    },
+    {
+      "company": "Brightpath",
+      "role": "UX Design Intern",
+      "dates": "Summer '20",
+      "body": "Redesigned onboarding flows for a personal finance product."
+    }
+  ],
+  "friends": [
+    { "name": "Jordan Lee", "role": "Designer — Orbit" },
+    { "name": "Sam Patel", "role": "Product Designer — Fieldnote" },
+    { "name": "Riley Chen", "role": "Design Engineer — Halo" },
+    { "name": "Morgan Diaz", "role": "Staff Designer — Parcel" },
+    { "name": "Casey Kim", "role": "UX Writer — Meridian" },
+    { "name": "Taylor Brooks", "role": "Design Lead — Kite" },
+    { "name": "Avery Nguyen", "role": "Visual Designer — Prism" },
+    { "name": "Quinn Okafor", "role": "Product Designer — Tandem" },
+    { "name": "Drew Santos", "role": "Motion Designer — Ripple" }
+  ],
+  "projects": [
+    { "title": "Threads", "tag": "Messaging · 2025" },
+    { "title": "Pulse", "tag": "Health dashboard · 2024" },
+    { "title": "Atlas", "tag": "Travel planning · 2023" },
+    { "title": "Canvas", "tag": "Design tooling · 2022" }
+  ]
+}

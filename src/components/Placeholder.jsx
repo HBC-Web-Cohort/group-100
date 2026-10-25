@@ -1,11 +1,14 @@
+import { useI18n } from '../i18n'
+
 // Gradient placeholder standing in for a real photo.
 export default function Placeholder({ label, hue = 220, ratio = '4 / 3' }) {
+  const { t } = useI18n()
   return (
     <div
       className="placeholder"
       style={{ '--hue': hue, aspectRatio: ratio }}
       role="img"
-      aria-label={`Placeholder image: ${label}`}
+      aria-label={`${t.ui.placeholderImage}: ${label}`}
     >
       <svg className="placeholder-icon" viewBox="0 0 24 24" aria-hidden="true">
         <rect x="3" y="5" width="18" height="14" rx="2.5" />

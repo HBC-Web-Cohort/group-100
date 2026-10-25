@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { profile } from '../data/content'
+import { useI18n } from '../i18n'
+import LanguageSwitch from './LanguageSwitch'
 
 const ExternalIcon = () => (
   <svg className="icon-external" viewBox="0 0 16 16" aria-hidden="true">
@@ -7,7 +9,24 @@ const ExternalIcon = () => (
   </svg>
 )
 
+function ThemeToggle({ theme, onToggle, className = '' }) {
+  const { t } = useI18n()
+  const label = theme === 'glass' ? t.ui.themeGlass : t.ui.themeClassic
+  return (
+    <button
+      className={`theme-toggle glass ${className}`}
+      onClick={onToggle}
+      aria-label={theme === 'glass' ? t.ui.switchToClassic : t.ui.switchToGlass}
+      title={label}
+    >
+      <span className={`theme-knob ${theme}`} />
+      <span className="theme-label">{label}</span>
+    </button>
+  )
+}
+
 export default function Nav({ page, onNavigate, theme, onToggleTheme }) {
+  const { t } = useI18n()
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -17,18 +36,18 @@ export default function Nav({ page, onNavigate, theme, onToggleTheme }) {
           className="logo-block"
           href="#/"
           onClick={() => onNavigate('work')}
-          aria-label={`${profile.name}, home`}
+          aria-label={`${t.profile.name}, ${t.ui.home}`}
         >
-          <span className="logomark">{profile.name.charAt(0)}</span>
+          <span className="logomark">{profile.monogram}</span>
           <span className="logo-text">
-            <span className="text-logo">{profile.name}</span>
-            <span className="text-underlogo">{profile.role}</span>
+            <span className="text-logo">{t.profile.name}</span>
+            <span className="text-underlogo">{t.profile.role}</span>
           </span>
         </a>
 
         <div className="nav-pill-wrapper">
           <span className={`nav-glow ${page}`} />
-          <nav className="nav-pill glass" aria-label="Primary">
+          <nav className="nav-pill glass" aria-label={t.ui.primaryNav}>
             <span className={`nav-indicator ${page}`} />
             <a
               href="#/"
@@ -36,7 +55,7 @@ export default function Nav({ page, onNavigate, theme, onToggleTheme }) {
               aria-current={page === 'work' ? 'page' : undefined}
               onClick={() => onNavigate('work')}
             >
-              Work
+              {t.ui.work}
             </a>
             <a
               href="#/info"
@@ -44,7 +63,7 @@ export default function Nav({ page, onNavigate, theme, onToggleTheme }) {
               aria-current={page === 'info' ? 'page' : undefined}
               onClick={() => onNavigate('info')}
             >
-              Info
+              {t.ui.info}
             </a>
           </nav>
         </div>
@@ -52,28 +71,21 @@ export default function Nav({ page, onNavigate, theme, onToggleTheme }) {
         <div className="nav-right">
           <div className="chip-socials-wrapper glass">
             {profile.socials.map((s) => (
-              <a key={s.label} className="chip-socials" href={s.href} target="_blank" rel="noreferrer">
-                {s.label}
+              <a key={s.id} className="chip-socials" href={s.href} target="_blank" rel="noreferrer">
+                {t.profile.socials[s.id]}
                 <ExternalIcon />
               </a>
             ))}
           </div>
 
-          <button
-            className="theme-toggle glass"
-            onClick={onToggleTheme}
-            aria-label={`Switch to ${theme === 'glass' ? 'classic' : 'glass'} theme`}
-            title={theme === 'glass' ? 'Glass theme on' : 'Classic theme on'}
-          >
-            <span className={`theme-knob ${theme}`} />
-            <span className="theme-label">{theme === 'glass' ? 'Glass' : 'Classic'}</span>
-          </button>
+          <LanguageSwitch className="desktop-only" />
+          <ThemeToggle theme={theme} onToggle={onToggleTheme} className="desktop-only" />
 
           <button
             className="nav-menu-button glass"
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
-            aria-label="Contact links"
+            aria-label={t.ui.contactLinks}
           >
             {menuOpen ? '×' : '@'}
           </button>
@@ -83,11 +95,17 @@ export default function Nav({ page, onNavigate, theme, onToggleTheme }) {
       {menuOpen && (
         <div className="mobile-popup glass">
           {profile.socials.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noreferrer">
-              {s.label}
+            <a key={s.id} href={s.href} target="_blank" rel="noreferrer">
+              {t.profile.socials[s.id]}
               <ExternalIcon />
             </a>
           ))}
+          {/* On phones the switchers move into this menu to keep the bar uncluttered */}
+          <div className="popup-settings">
+            <p className="overline-text">{t.ui.settings}</p>
+            <LanguageSwitch />
+            <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+          </div>
         </div>
       )}
     </header>

@@ -1,4 +1,5 @@
-import { heroLine, storyRows, experience, friends } from '../data/content'
+import { storyLayout, friendSites } from '../data/content'
+import { useI18n } from '../i18n'
 import GlassWindow from './GlassWindow'
 import Placeholder from './Placeholder'
 import Reveal from './Reveal'
@@ -10,25 +11,32 @@ const Overline = ({ children }) => (
   </div>
 )
 
-function StoryBlock({ block }) {
-  const image = block.image && (
-    <GlassWindow title={block.image.label}>
-      <Placeholder label={block.image.label} hue={block.image.hue} />
+// Initials kept as separate glyphs (ZWNJ) so Dari letters don't join.
+const initials = (name) =>
+  name
+    .split(' ')
+    .map((n) => n[0])
+    .join('‌')
+
+function StoryBlock({ layout, text: copy, signature }) {
+  const image = (
+    <GlassWindow title={copy.image}>
+      <Placeholder label={copy.image} hue={layout.hue} />
     </GlassWindow>
   )
   const text = (
     <div className="story-text">
-      <p className="emphasis">{block.title}</p>
-      {block.body?.map((p, i) => <p key={i}>{p}</p>)}
-      {block.closing && <p className="emphasis closing">{block.closing}</p>}
-      {block.signature && <span className="signature">Alex</span>}
+      <p className="emphasis">{copy.title}</p>
+      {copy.body?.map((p, i) => <p key={i}>{p}</p>)}
+      {copy.closing && <p className="emphasis closing">{copy.closing}</p>}
+      {layout.signature && <span className="signature">{signature}</span>}
     </div>
   )
 
   // Offset blocks put the text above the image, like the reference layout.
   return (
-    <div className={`story-block ${block.offset ? 'has-offset' : ''}`}>
-      {block.offset ? (
+    <div className={`story-block ${layout.offset ? 'has-offset' : ''}`}>
+      {layout.offset ? (
         <>
           {text}
           {image}
@@ -44,21 +52,23 @@ function StoryBlock({ block }) {
 }
 
 export default function InfoPage() {
+  const { t } = useI18n()
+
   return (
     <main>
       <section className="info-hero container">
         <Reveal>
-          <Overline>ABOUT ME</Overline>
+          <Overline>{t.ui.aboutMe}</Overline>
           <h1 className="text-hero">
-            {heroLine.lead} <span className="serif">{heroLine.accent}</span>
+            {t.hero.lead} <span className="serif">{t.hero.accent}</span>
           </h1>
         </Reveal>
 
-        {storyRows.map((row, i) => (
+        {storyLayout.map((row, i) => (
           <div className="double-column" key={i}>
-            {row.map((block, j) => (
+            {row.map((layout, j) => (
               <Reveal key={j} delay={j * 120}>
-                <StoryBlock block={block} />
+                <StoryBlock layout={layout} text={t.story[i][j]} signature={t.profile.signature} />
               </Reveal>
             ))}
           </div>
@@ -69,10 +79,10 @@ export default function InfoPage() {
 
       <section className="container section-general">
         <Reveal>
-          <Overline>EXPERIENCE</Overline>
+          <Overline>{t.ui.experience}</Overline>
         </Reveal>
         <div className="experience-list">
-          {experience.map((job, i) => (
+          {t.experience.map((job, i) => (
             <Reveal key={job.company} delay={i * 80}>
               <article className="experience-card glass">
                 <h2 className="heading">{job.company}</h2>
@@ -93,23 +103,20 @@ export default function InfoPage() {
 
       <section className="container section-general last">
         <Reveal>
-          <Overline>FRIENDS</Overline>
+          <Overline>{t.ui.friends}</Overline>
         </Reveal>
         <div className="friends-grid">
-          {friends.map((f, i) => (
-            <Reveal key={f.name} delay={(i % 3) * 80}>
+          {t.friends.map((f, i) => (
+            <Reveal key={friendSites[i]} delay={(i % 3) * 80}>
               <div className="friend-block glass">
                 <div className="friend-avatar" style={{ '--hue': (i * 47) % 360 }}>
-                  {f.name
-                    .split(' ')
-                    .map((n) => n[0])
-                    .join('')}
+                  {initials(f.name)}
                 </div>
                 <div>
                   <p className="friend-name">{f.name}</p>
                   <p className="meta">{f.role}</p>
-                  <a className="friend-link" href="#" onClick={(e) => e.preventDefault()}>
-                    {f.site} ↗
+                  <a className="friend-link" href="#" dir="ltr" onClick={(e) => e.preventDefault()}>
+                    {friendSites[i]} ↗
                   </a>
                 </div>
               </div>
